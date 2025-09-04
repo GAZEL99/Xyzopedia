@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>XYZOPEDIA.ID - Pembayaran</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #0A1128;
+      --bg-gradient: linear-gradient(135deg, #001F54, #0A1128);
+      --primary: #034078;
+      --primary-alt: #1282A2;
+      --accent: #E8D5B5;
+      --text-light: #E0FBFC;
+      --text: #FDFDFF;
+      --border: rgba(3, 64, 120, 0.4);
+      --card-bg: rgba(0, 31, 84, 0.8);
+      --error: #E74C3C;
+      --success: #2ECC71;
+      --warning: #F1C40F;
+      --shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      --card-shadow-hover: 0 12px 30px rgba(3, 64, 120, 0.5);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: var(--bg-dark);
+      color: var(--text);
+      overflow-x: hidden;
+      min-height: 100vh;
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 480px;
+      width: 100%;
+      margin: 20px auto;
+      padding: 24px;
+      border-radius: 16px;
+      background: var(--bg-gradient);
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      animation: fadeInUp 0.6s forwards;
+    }
+
+    .headline-logo {
+      font-family: 'Bungee', cursive;
+      font-size: 3.5rem;
+      text-align: center;
+      margin: 20px 0 40px;
+      color: var(--accent);
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+    }
+  
+    .logo-text {
+      display: inline-flex;
+      position: relative;
+    }
+  
+    .logo-part {
+      display: inline-block;
+      transform: translateY(20px);
+      opacity: 0;
+      animation: letterDrop 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+      animation-delay: var(--delay);
+      text-shadow: 0 0 10px rgba(232, 213, 181, 0.5);
+    }
+  
+    .logo-dot {
+      color: var(--primary-alt);
+      animation: pulse 2s infinite;
+    }
+  
+    .logo-domain {
+      font-size: 2rem;
+      color: var(--text-light);
+      opacity: 0;
+      transform: translateX(-20px);
+      animation: slideInRight 0.5s 0.9s forwards;
+    }
+
+    .headline-section {
+      background: linear-gradient(135deg, var(--primary), var(--primary-alt));
+      padding: 1.5rem;
+      text-align: center;
+      border-radius: 15px;
+      margin: 0 auto 2rem;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      border: 2px solid var(--accent);
+    }
+  
+    .headline-content {
+      position: relative;
+      z-index: 2;
+    }
+  
+    .headline-main {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--text);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 8px;
+      text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    }
+  
+    .headline-sub {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 1px;
+    }
+
+    .section {
+      margin-bottom: 24px;
+      opacity: 0;
+      animation: fadeInUp 0.6s forwards;
+      animation-delay: 0.3s;
+    }
+    
+    .section-title {
+      font-weight: 700;
+      font-size: 1.3rem;
+      color: var(--accent);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      text-align: center;
+      padding: 0 20px;
+      text-shadow: 0 0 8px rgba(232, 213, 181, 0.3);
+    }
+    
+    .section-title::before, .section-title::after {
+      content: "";
+      flex: 1;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--primary-alt), transparent);
+      margin: 0 15px;
+      border-radius: 2px;
+    }
+    
+    .section-title i {
+      margin-right: 10px;
+      color: var(--primary-alt);
+      font-size: 1.1em;
+    }
+
+    .order-details {
+      background: rgba(0, 31, 84, 0.7);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px;
+      margin-bottom: 20px;
+      font-size: 15px;
+      line-height: 1.7;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .detail-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      padding-bottom: 8px;
+      border-bottom: 1px dashed var(--border);
+    }
+
+    .detail-item:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+
+    .detail-label {
+      color: var(--text-light);
+      font-weight: 500;
+    }
+
+    .detail-value {
+      color: var(--accent);
+      font-weight: 600;
+      text-align: right;
+    }
+
+    .qris-container {
+      text-align: center;
+      margin: 20px 0;
+      padding: 15px;
+      background: rgba(232, 213, 181, 0.1);
+      border-radius: 12px;
+      border: 2px solid var(--accent);
+      animation: pulseGlow 2s infinite alternate;
+    }
+
+    .qris-image {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin-bottom: 15px;
+    }
+
+    .harga-input {
+      background: rgba(232, 213, 181, 0.1);
+      font-weight: 800;
+      color: var(--accent);
+      border: 2px solid var(--accent);
+      border-radius: 12px;
+      padding: 18px;
+      font-size: 20px;
+      text-align: center;
+      transition: all 0.3s;
+      animation: priceGlowAccent 2s infinite alternate;
+      text-shadow: 0 0 10px rgba(232, 213, 181, 0.5);
+      margin: 20px 0;
+    }
+
+    .countdown {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--warning);
+      text-align: center;
+      margin: 15px 0;
+      padding: 10px;
+      border-radius: 8px;
+      background: rgba(241, 196, 15, 0.1);
+      border: 1px solid var(--warning);
+    }
+
+    .status-message {
+      padding: 15px;
+      border-radius: 12px;
+      text-align: center;
+      font-weight: 600;
+      margin: 20px 0;
+      display: none;
+    }
+
+    .status-success {
+      background: rgba(46, 204, 113, 0.15);
+      color: var(--success);
+      border: 1px solid var(--success);
+      display: none;
+    }
+
+    .status-error {
+      background: rgba(231, 76, 60, 0.15);
+      color: var(--error);
+      border: 1px solid var(--error);
+      display: none;
+    }
+
+    .status-processing {
+      background: rgba(241, 196, 15, 0.15);
+      color: var(--warning);
+      border: 1px solid var(--warning);
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    button, .btn {
+      background: linear-gradient(135deg, var(--primary-alt), var(--primary));
+      color: var(--bg-dark);
+      border: none;
+      border-radius: 10px;
+      padding: 16px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+      flex: 1;
+    }
+    
+    button:hover, .btn:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 30px rgba(18, 130, 162, 0.5);
+      letter-spacing: 0.5px;
+    }
+
+    .btn-success {
+      background: linear-gradient(135deg, var(--success), #27ae60);
+    }
+
+    .btn-warning {
+      background: linear-gradient(135deg, var(--warning), #e67e22);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 2px solid var(--accent);
+      color: var(--accent);
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes letterDrop {
+      0% {
+        transform: translateY(-30px);
+        opacity: 0;
+      }
+      100% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+    
+    @keyframes slideInRight {
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+    
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    }
+
+    @keyframes pulseGlow {
+      0% { box-shadow: 0 0 0 rgba(232, 213, 181, 0); }
+      100% { box-shadow: 0 0 10px rgba(232, 213, 181, 0.3); }
+    }
+
+    @keyframes priceGlowAccent {
+      0% { box-shadow: 0 0 5px rgba(232, 213, 181, 0.3); }
+      100% { box-shadow: 0 0 20px rgba(232, 213, 181, 0.6); }
+    }
+
+    .loading {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid rgba(255,255,255,.3);
+      border-radius: 50%;
+      border-top-color: #fff;
+      animation: spin 1s ease-in-out infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    @media (max-width: 480px) {
+      .headline-logo {
+        font-size: 2.8rem;
+      }
+      
+      .logo-domain {
+        font-size: 1.6rem;
+      }
+      
+      .headline-main {
+        font-size: 1.6rem;
+      }
+      
+      .section-title {
+        font-size: 1.1rem;
+      }
+      
+      .action-buttons {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1 class="headline-logo">
+    <span class="logo-text">
+      <span class="logo-part" style="--delay: 0s">X</span>
+      <span class="logo-part" style="--delay: 0.1s">Y</span>
+      <span class="logo-part" style="--delay: 0.2s">Z</span>
+      <span class="logo-part" style="--delay: 0.3s">O</span>
+      <span class="logo-part" style="--delay: 0.4s">P</span>
+      <span class="logo-part" style="--delay: 0.5s">E</span>
+      <span class="logo-part" style="--delay: 0.6s">D</span>
+      <span class="logo-part" style="--delay: 0.7s">I</span>
+      <span class="logo-part" style="--delay: 0.8s">A</span>
+    </span>
+    <span class="logo-dot">.</span>
+    <span class="logo-domain">ID</span>
+  </h1>
+
+  <div class="headline-section">
+    <div class="headline-content">
+      <div class="headline-main">PEMBAYARAN</div>
+      <div class="headline-sub">Scan QRIS untuk menyelesaikan pembayaran</div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="section">
+      <div class="section-title"><i class="fas fa-receipt"></i> Detail Pesanan</div>
+      <div class="order-details" id="orderDetails">
+        <!-- Detail pesanan akan diisi oleh JavaScript -->
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><i class="fas fa-qrcode"></i> Pembayaran QRIS</div>
+      <div class="qris-container">
+        <img id="qrisImage" class="qris-image" src="" alt="QR Code Pembayaran">
+        <div class="harga-input" id="amountDisplay">Rp 0</div>
+        <div class="countdown" id="countdown">Batas waktu: 15:00</div>
+      </div>
+      
+      <div class="status-message status-processing" id="statusProcessing">
+        <i class="fas fa-sync-alt fa-spin"></i> Menunggu pembayaran...
+      </div>
+      
+      <div class="status-message status-success" id="statusSuccess">
+        <i class="fas fa-check-circle"></i> Pembayaran berhasil! Pesanan Anda sedang diproses.
+      </div>
+      
+      <div class="status-message status-error" id="statusError">
+        <i class="fas fa-exclamation-circle"></i> <span id="errorMessage">Pembayaran gagal atau dibatalkan</span>
+      </div>
+    </div>
+
+    <div class="action-buttons">
+      <button id="checkStatusBtn" class="btn-warning">
+        <i class="fas fa-sync-alt"></i> Cek Status
+      </button>
+      <button id="backToHomeBtn" class="btn-outline">
+        <i class="fas fa-home"></i> Kembali ke Home
+      </button>
+    </div>
+  </div>
+
+  <script>
+    // Variabel global
+    let orderData = {};
+    let reffId = '';
+    let countdownInterval;
+    let paymentCheckInterval;
+    const paymentTimeout = 15 * 60; // 15 menit dalam detik
+
+    // Fungsi untuk memuat data pesanan dari localStorage
+    function loadOrderData() {
+      const productName = localStorage.getItem('productName');
+      const productPrice = localStorage.getItem('productPrice');
+      const customerEmail = localStorage.getItem('customerEmail');
+      const customerDevice = localStorage.getItem('customerDevice');
+      const customerProfile = localStorage.getItem('customerProfile');
+      const customerWhatsapp = localStorage.getItem('customerWhatsapp');
+      const paymentMethod = localStorage.getItem('paymentMethod');
+
+      if (!productName || !productPrice) {
+        showError('Data pesanan tidak ditemukan. Silakan lakukan pemesanan ulang.');
+        return false;
+      }
+
+      orderData = {
+        productName,
+        productPrice: parseInt(productPrice),
+        customerEmail: customerEmail || '-',
+        customerDevice: customerDevice || '-',
+        customerProfile: customerProfile || '-',
+        customerWhatsapp: customerWhatsapp || '-',
+        paymentMethod: paymentMethod || 'QRIS'
+      };
+
+      return true;
+    }
+
+    // Fungsi untuk menampilkan detail pesanan
+    function displayOrderDetails() {
+      const detailsContainer = document.getElementById('orderDetails');
+      const amountDisplay = document.getElementById('amountDisplay');
+      
+      detailsContainer.innerHTML = `
+        <div class="detail-item">
+          <span class="detail-label">Produk:</span>
+          <span class="detail-value">${orderData.productName}</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Email:</span>
+          <span class="detail-value">${orderData.customerEmail}</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">WhatsApp:</span>
+          <span class="detail-value">${orderData.customerWhatsapp}</span>
+        </div>
+        ${orderData.customerDevice !== '-' ? `
+        <div class="detail-item">
+          <span class="detail-label">Device:</span>
+          <span class="detail-value">${orderData.customerDevice}</span>
+        </div>` : ''}
+        ${orderData.customerProfile !== '-' ? `
+        <div class="detail-item">
+          <span class="detail-label">Profile/PIN:</span>
+          <span class="detail-value">${orderData.customerProfile}</span>
+        </div>` : ''}
+        <div class="detail-item">
+          <span class="detail-label">Metode Pembayaran:</span>
+          <span class="detail-value">${orderData.paymentMethod}</span>
+        </div>
+      `;
+      
+      amountDisplay.textContent = `Rp ${orderData.productPrice.toLocaleString('id-ID')}`;
+    }
+
+    // Fungsi untuk membuat permintaan pembayaran
+    async function createPaymentRequest() {
+      try {
+        showStatus('processing');
+        
+        // Tentukan kode produk berdasarkan nama produk
+        let productCode = 'BSTATION'; // Default
+        
+        if (orderData.productName.includes('Netflix')) productCode = 'NETFLIX';
+        else if (orderData.productName.includes('Canva')) productCode = 'CANVA';
+        else if (orderData.productName.includes('Prime')) productCode = 'PRIME';
+        
+        // Tentukan target berdasarkan data customer
+        const target = orderData.customerEmail !== '-' ? orderData.customerEmail : orderData.customerWhatsapp;
+        
+        const response = await fetch('http://localhost:3000/order', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            code: productCode,
+            target: target
+          }),
+        });
+        
+        const data = await response.json();
+        
+        if (response.ok) {
+          reffId = data.reff_id;
+          document.getElementById('qrisImage').src = data.qr;
+          startCountdown();
+          startPaymentStatusCheck();
+        } else {
+          throw new Error(data.message || 'Gagal membuat permintaan pembayaran');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        showError('Terjadi kesalahan: ' + error.message);
+      }
+    }
+
+    // Fungsi untuk memeriksa status pembayaran
+    async function checkPaymentStatus() {
+      if (!reffId) return;
+      
+      try {
+        const response = await fetch(`http://localhost:3000/status/${reffId}`);
+        const data = await response.json();
+        
+        if (data.data && data.data.status === 'PAID') {
+          clearInterval(paymentCheckInterval);
+          clearInterval(countdownInterval);
+          showStatus('success');
+          
+          // Kirim notifikasi ke Telegram tentang pembayaran berhasil
+          sendTelegramNotification('Pembayaran berhasil');
+        }
+      } catch (error) {
+        console.error('Error checking payment status:', error);
+      }
+    }
+
+    // Fungsi untuk memulai pemeriksaan status pembayaran
+    function startPaymentStatusCheck() {
+      paymentCheckInterval = setInterval(checkPaymentStatus, 5000); // Cek setiap 5 detik
+    }
+
+    // Fungsi untuk memulai countdown
+    function startCountdown() {
+      let timeLeft = paymentTimeout;
+      
+      countdownInterval = setInterval(() => {
+        timeLeft--;
+        
+        if (timeLeft <= 0) {
+          clearInterval(countdownInterval);
+          clearInterval(paymentCheckInterval);
+          showError('Waktu pembayaran telah habis. Silakan lakukan pemesanan ulang.');
+          return;
+        }
+        
+        const minutes = Math.floor(timeLeft / 60);
+        const seconds = timeLeft % 60;
+        document.getElementById('countdown').textContent = `Batas waktu: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+      }, 1000);
+    }
+
+    // Fungsi untuk menampilkan status
+    function showStatus(status) {
+      document.getElementById('statusProcessing').style.display = status === 'processing' ? 'block' : 'none';
+      document.getElementById('statusSuccess').style.display = status === 'success' ? 'block' : 'none';
+      document.getElementById('statusError').style.display = status === 'error' ? 'block' : 'none';
+    }
+
+    // Fungsi untuk menampilkan error
+    function showError(message) {
+      document.getElementById('errorMessage').textContent = message;
+      showStatus('error');
+    }
+
+    // Fungsi untuk mengirim notifikasi ke Telegram
+    async function sendTelegramNotification(message) {
+      try {
+        const botToken = '8298329168:AAHkncNR2LwSgqiNaA-KfwyyS-7JRf1GgCY';
+        const chatId = '7604853514';
+        
+        const telegramMessage = `💰 *PEMBAYARAN BERHASIL* 💰
+
+📦 Produk: ${orderData.productName}
+💵 Harga: Rp ${orderData.productPrice.toLocaleString('id-ID')}
+📧 Email: ${orderData.customerEmail}
+📱 WhatsApp: ${orderData.customerWhatsapp}
+🆔 Reff ID: ${reffId}
+
+⏰ Waktu: ${new Date().toLocaleString('id-ID')}`;
+
+        await fetch(`https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(telegramMessage)}&parse_mode=Markdown`);
+      } catch (error) {
+        console.error('Error sending Telegram notification:', error);
+      }
+    }
+
+    // Inisialisasi saat halaman dimuat
+    document.addEventListener('DOMContentLoaded', function() {
+      if (loadOrderData()) {
+        displayOrderDetails();
+        createPaymentRequest();
+      }
+      
+      // Event listener untuk tombol cek status
+      document.getElementById('checkStatusBtn').addEventListener('click', checkPaymentStatus);
+      
+      // Event listener untuk tombol kembali ke home
+      document.getElementById('backToHomeBtn').addEventListener('click', function() {
+        window.location.href = 'index.html';
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Produk Belum Tersedia - xyzopedia.id</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <style>
+    /* Updated Color Palette and Global Styles */
+    :root {
+      --bg-dark: #0A1128;
+      --bg-gradient: linear-gradient(135deg, #001F54, #0A1128);
+      --primary: #034078;
+      --primary-alt: #1282A2;
+      --accent: #E8D5B5;
+      --text-light: #E0FBFC;
+      --text: #FDFDFF;
+      --border: rgba(3, 64, 120, 0.4);
+      --card-bg: rgba(0, 31, 84, 0.8);
+      --error: #E74C3C;
+      --success: #2ECC71;
+      --warning: #F1C40F;
+      --shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      --card-shadow-hover: 0 12px 30px rgba(3, 64, 120, 0.5);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: var(--bg-dark);
+      color: var(--text);
+      overflow-x: hidden;
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* Header */
+    header {
+      background: var(--bg-gradient);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: var(--shadow);
+      border-bottom: 1px solid var(--border);
+      animation: fadeInDown 0.8s ease-out;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .logo-icon {
+      color: var(--accent);
+      font-size: 2.2rem;
+      animation: rotateIn 1.5s ease-out forwards;
+    }
+
+    .logo-text {
+      position: relative;
+    }
+
+    .logo-text span {
+      color: var(--primary-alt);
+    }
+
+    .logo-text::after {
+      content: "";
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .logo:hover .logo-text::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+
+    /* Navbar */
+    .navbar {
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-menu {
+      display: flex;
+      list-style: none;
+      gap: 2.5rem;
+    }
+
+    .nav-link {
+      color: var(--text-light);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1.05rem;
+      transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      position: relative;
+      padding: 0.5rem 0;
+    }
+
+    .nav-link::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--primary-alt);
+      transition: width 0.3s ease-out;
+    }
+
+    .nav-link:hover {
+      color: var(--primary-alt);
+      transform: translateY(-2px);
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    .menu-toggle {
+      display: none;
+      font-size: 2rem;
+      cursor: pointer;
+      color: var(--text-light);
+      transition: all 0.3s ease-in-out;
+    }
+
+    .menu-toggle:hover {
+      color: var(--primary-alt);
+      transform: rotate(90deg);
+    }
+
+    /* Main Content */
+    .main-content {
+      min-height: 70vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 4rem 2rem;
+      animation: fadeIn 1s ease-out;
+    }
+
+    .error-icon {
+      font-size: 6rem;
+      color: var(--error);
+      margin-bottom: 2rem;
+      animation: pulse 2s infinite;
+    }
+
+    .error-title {
+      font-size: 3rem;
+      font-weight: 800;
+      margin-bottom: 1.5rem;
+      color: var(--accent);
+      line-height: 1.2;
+    }
+
+    .error-message {
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: 0 auto 3rem;
+      color: var(--text-light);
+    }
+
+    .back-button {
+      display: inline-block;
+      background: var(--primary-alt);
+      color: var(--text);
+      padding: 1rem 2.5rem;
+      border-radius: 35px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.4s ease-in-out;
+      box-shadow: 0 6px 20px rgba(18, 130, 162, 0.5);
+      position: relative;
+      overflow: hidden;
+      border: none;
+      cursor: pointer;
+      font-size: 1.1rem;
+    }
+
+    .back-button::before {
+      content: '←';
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%) translateX(-20px);
+      opacity: 0;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .back-button:hover::before {
+      transform: translateY(-50%) translateX(0);
+      opacity: 1;
+    }
+
+    .back-button:hover {
+      background: var(--accent);
+      color: var(--primary);
+      box-shadow: 0 0 0 4px var(--primary-alt);
+      transform: translateY(-3px);
+      padding-left: 3rem;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--bg-gradient);
+      color: var(--text);
+      text-align: center;
+      padding: 4rem 1rem;
+      margin-top: auto;
+      border-top: 2px solid var(--primary);
+      animation: fadeIn 1s ease-out;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .footer-logo {
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 2rem;
+      color: var(--accent);
+      letter-spacing: 1px;
+      position: relative;
+      display: inline-block;
+    }
+
+    .footer-logo::after {
+      content: '✦';
+      position: absolute;
+      top: 50%;
+      left: -20px;
+      transform: translateY(-50%) rotate(0deg);
+      font-size: 1.5rem;
+      color: var(--primary-alt);
+      animation: spinStar 3s infinite linear;
+    }
+
+    .footer-logo::before {
+      content: '✦';
+      position: absolute;
+      top: 50%;
+      right: -20px;
+      transform: translateY(-50%) rotate(0deg);
+      font-size: 1.5rem;
+      color: var(--primary-alt);
+      animation: spinStar 3s infinite reverse linear;
+    }
+
+    @keyframes spinStar {
+      from { transform: translateY(-50%) rotate(0deg); }
+      to { transform: translateY(-50%) rotate(360deg); }
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 2.5rem;
+      margin: 2rem 0;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: var(--text-light);
+      text-decoration: none;
+      transition: color 0.3s ease, transform 0.3s ease, text-shadow 0.3s ease;
+      font-weight: 500;
+      position: relative;
+      padding: 0.3rem 0;
+    }
+
+    .footer-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background: var(--primary-alt);
+      transition: all 0.3s ease-in-out;
+      transform: translateX(-50%);
+    }
+
+    .footer-links a:hover::after {
+      width: 100%;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary-alt);
+      transform: translateY(-5px);
+      text-shadow: 0 0 10px rgba(18, 130, 162, 0.5);
+    }
+
+    .footer-social {
+      display: flex;
+      justify-content: center;
+      gap: 2.2rem;
+      margin: 2rem 0 2.5rem;
+    }
+
+    .footer-social a {
+      color: var(--text-light);
+      font-size: 2.2rem;
+      transition: color 0.3s ease, transform 0.3s ease, filter 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      border: 2px solid var(--border);
+    }
+
+    .footer-social a:hover {
+      color: var(--primary-alt);
+      transform: scale(1.3) rotate(5deg);
+      filter: drop-shadow(0 0 8px var(--primary-alt));
+      border-color: var(--primary-alt);
+    }
+
+    /* Specific social icon hover colors */
+    .footer-social a .fa-instagram:hover { color: #E1306C; }
+    .footer-social a .fa-facebook:hover { color: #3b5998; }
+    .footer-social a .fa-twitter:hover { color: #00acee; }
+    .footer-social a .fa-whatsapp:hover { color: #25D366; }
+
+    .copyright {
+      font-size: 1rem;
+      opacity: 0.95;
+      color: var(--text-light);
+      margin-top: 1.5rem;
+    }
+
+    /* Animations */
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.1); opacity: 0.8; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    @keyframes rotateIn {
+      0% { transform: rotateY(0deg) scale(0); opacity: 0; }
+      100% { transform: rotateY(360deg) scale(1); opacity: 1; }
+    }
+
+    @keyframes fadeInDown {
+      0% { opacity: 0; transform: translateY(-20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: block;
+      }
+
+      .nav-menu {
+        position: fixed;
+        top: 80px;
+        left: 0;
+        width: 100%;
+        background: var(--bg-gradient);
+        flex-direction: column;
+        align-items: center;
+        padding: 1.5rem 0;
+        gap: 1.2rem;
+        transform: translateY(-150%);
+        transition: transform 0.4s ease-in-out;
+        z-index: 999;
+        border-bottom-left-radius: 15px;
+        border-bottom-right-radius: 15px;
+      }
+
+      .nav-menu.active {
+        transform: translateY(0);
+      }
+
+      .error-icon {
+        font-size: 4.5rem;
+      }
+
+      .error-title {
+        font-size: 2.2rem;
+      }
+
+      .error-message {
+        font-size: 1rem;
+      }
+
+      .back-button {
+        padding: 0.9rem 2rem;
+        font-size: 1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header {
+        padding: 0.8rem 1.2rem;
+      }
+
+      .logo {
+        font-size: 1.6rem;
+      }
+
+      .logo-icon {
+        font-size: 1.9rem;
+      }
+
+      .error-icon {
+        font-size: 3.5rem;
+      }
+
+      .error-title {
+        font-size: 1.8rem;
+      }
+
+      .error-message {
+        font-size: 0.95rem;
+      }
+
+      .back-button {
+        padding: 0.8rem 1.8rem;
+        font-size: 0.95rem;
+      }
+
+      footer {
+        padding: 2.5rem 0.8rem;
+      }
+
+      .footer-logo {
+        font-size: 1.8rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .footer-logo::after, .footer-logo::before {
+        font-size: 1.2rem;
+      }
+
+      .footer-links {
+        gap: 1rem;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .footer-social {
+        gap: 1.5rem;
+        margin: 1.5rem 0 2rem;
+      }
+
+      .footer-social a {
+        font-size: 1.5rem;
+        width: 40px;
+        height: 40px;
+      }
+
+      .copyright {
+        font-size: 0.85rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <i class="fas fa-gamepad logo-icon"></i>
+      <div class="logo-text">xyzo<span>pedia</span>.id</div>
+    </div>
+    <nav class="navbar">
+      <ul class="nav-menu">
+        <li><a href="home.html" class="nav-link">Beranda</a></li>
+        <li><a href="home.html#products" class="nav-link">Produk</a></li>
+        <li><a href="home.html#promo" class="nav-link">Promo</a></li>
+        <li><a href="home.html#about" class="nav-link">Tentang</a></li>
+        <li><a href="home.html#contact" class="nav-link">Kontak</a></li>
+      </ul>
+      <div class="menu-toggle">
+        <i class="fas fa-bars"></i>
+      </div>
+    </nav>
+  </header>
+
+  <main class="main-content">
+    <div class="error-icon animate__animated animate__pulse">
+      <i class="fas fa-exclamation-circle"></i>
+    </div>
+    <h1 class="error-title">Produk Sedang Tidak Tersedia</h1>
+    <p class="error-message">
+      Maaf, produk yang Anda cari saat ini belum tersedia di xyzopedia.id. 
+      Kami sedang berusaha untuk menambahkan lebih banyak produk dalam waktu dekat. 
+      Silakan kembali ke halaman utama untuk melihat produk lain yang tersedia.
+    </p>
+    <a href="home.html" class="back-button">Kembali ke Beranda</a>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-logo">xyzopedia.id</div>
+      <div class="footer-links">
+        <a href="home.html">Beranda</a>
+        <a href="home.html#products">Produk</a>
+        <a href="home.html#promo">Promo</a>
+        <a href="home.html#about">Tentang Kami</a>
+        <a href="home.html#contact">Hubungi Kami</a>
+        <a href="#">Kebijakan Privasi</a>
+      </div>
+      <div class="footer-social">
+        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+        <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+      </div>
+      <div class="copyright">
+        &copy; 2025 xyzopedia.id. Hak Cipta Dilindungi Undang-Undang.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Mobile menu toggle
+      const menuToggle = document.querySelector('.menu-toggle');
+      const navMenu = document.querySelector('.nav-menu');
+
+      menuToggle.addEventListener('click', () => {
+        navMenu.classList.toggle('active');
+        menuToggle.querySelector('i').classList.toggle('fa-bars');
+        menuToggle.querySelector('i').classList.toggle('fa-times');
+      });
+    });
+  </script>
+</body>
+</html>

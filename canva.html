@@ -1,0 +1,1240 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>XYZOPEDIA.ID - Canva Pro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet">
+  <style>
+    /* Updated Color Palette and Global Styles */
+    :root {
+      --bg-dark: #0A1128;
+      --bg-gradient: linear-gradient(135deg, #001F54, #0A1128);
+      --primary: #034078;
+      --primary-alt: #1282A2;
+      --accent: #E8D5B5;
+      --text-light: #E0FBFC;
+      --text: #FDFDFF;
+      --border: rgba(3, 64, 120, 0.4);
+      --card-bg: rgba(0, 31, 84, 0.8);
+      --error: #E74C3C;
+      --success: #2ECC71;
+      --warning: #F1C40F;
+      --shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      --card-shadow-hover: 0 12px 30px rgba(3, 64, 120, 0.5);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: var(--bg-dark);
+      color: var(--text);
+      overflow-x: hidden;
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 480px;
+      margin: 20px auto;
+      padding: 24px;
+      border-radius: 16px;
+      background: var(--bg-gradient);
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+    }
+
+    /* New Headline Styles */
+    .headline-logo {
+      font-family: 'Bungee', cursive;
+      font-size: 3.5rem;
+      text-align: center;
+      margin: 40px 0;
+      color: var(--accent);
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+    }
+  
+    .logo-text {
+      display: inline-flex;
+      position: relative;
+    }
+  
+    .logo-part {
+      display: inline-block;
+      transform: translateY(20px);
+      opacity: 0;
+      animation: letterDrop 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+      animation-delay: var(--delay);
+      text-shadow: 0 0 10px rgba(232, 213, 181, 0.5);
+      transition: all 0.3s ease;
+    }
+  
+    .logo-part:hover {
+      color: var(--text-light);
+      transform: translateY(-5px) !important;
+      text-shadow: 0 0 20px rgba(232, 213, 181, 0.8);
+    }
+  
+    .logo-dot {
+      color: var(--primary-alt);
+      animation: pulse 2s infinite;
+    }
+  
+    .logo-domain {
+      font-size: 2rem;
+      color: var(--text-light);
+      opacity: 0;
+      transform: translateX(-20px);
+      animation: slideInRight 0.5s 0.9s forwards;
+    }
+  
+    .headline-section {
+      background: linear-gradient(135deg, var(--primary), var(--primary-alt));
+      padding: 1.5rem;
+      text-align: center;
+      border-radius: 15px;
+      margin: 0 auto 2rem;
+      max-width: 90%;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      border: 2px solid var(--accent);
+    }
+  
+    .headline-content {
+      position: relative;
+      z-index: 2;
+    }
+  
+    .headline-main {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--text);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 8px;
+      text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+      animation: textGlow 2s infinite alternate;
+    }
+  
+    .headline-sub {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 1px;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+  
+    .headline-sub::before, .headline-sub::after {
+      content: "•";
+      color: var(--text-light);
+    }
+  
+    .headline-decoration {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 1;
+      opacity: 0.2;
+    }
+  
+    .decoration-circle {
+      position: absolute;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: float 15s infinite linear;
+    }
+  
+    .decoration-circle:nth-child(1) {
+      width: 100px;
+      height: 100px;
+      top: -30px;
+      left: -30px;
+      animation-delay: 0s;
+      animation-duration: 20s;
+    }
+  
+    .decoration-circle:nth-child(2) {
+      width: 60px;
+      height: 60px;
+      bottom: -20px;
+      right: -10px;
+      animation-delay: 5s;
+      animation-duration: 15s;
+    }
+  
+    .decoration-circle:nth-child(3) {
+      width: 30px;
+      height: 30px;
+      top: 50%;
+      left: 70%;
+      animation-delay: 10s;
+    }
+
+    /* Main Container Sections */
+    .section {
+      margin-bottom: 32px;
+      animation: fadeInUp 0.6s forwards;
+      opacity: 0;
+    }
+    
+    .section:nth-child(1) { animation-delay: 0.1s; }
+    .section:nth-child(2) { animation-delay: 0.2s; }
+    .section:nth-child(3) { animation-delay: 0.3s; }
+    .section:nth-child(4) { animation-delay: 0.4s; }
+    .section:nth-child(5) { animation-delay: 0.5s; }
+    .section:nth-child(6) { animation-delay: 0.6s; }
+    .section:nth-child(7) { animation-delay: 0.7s; }
+    
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .section-title {
+      font-weight: 700;
+      font-size: 1.3rem;
+      color: var(--accent);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      text-align: center;
+      padding: 0 20px;
+      text-shadow: 0 0 8px rgba(232, 213, 181, 0.3);
+    }
+    
+    .section-title::before, .section-title::after {
+      content: "";
+      flex: 1;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--primary-alt), transparent);
+      margin: 0 15px;
+      border-radius: 2px;
+    }
+    
+    .section-title i {
+      margin-right: 10px;
+      color: var(--primary-alt);
+      font-size: 1.1em;
+    }
+    
+    .info-box {
+      background: rgba(0, 31, 84, 0.7);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px;
+      margin-bottom: 20px;
+      font-size: 15px;
+      line-height: 1.7;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      animation: pulseGlow 2s infinite alternate;
+    }
+
+    @keyframes pulseGlow {
+      0% { box-shadow: 0 0 0 rgba(232, 213, 181, 0); }
+      100% { box-shadow: 0 0 10px rgba(232, 213, 181, 0.3); }
+    }
+    
+    .info-box::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        135deg,
+        rgba(232, 213, 181, 0) 0%,
+        rgba(232, 213, 181, 0.05) 50%,
+        rgba(232, 213, 181, 0) 100%
+      );
+      transform: translateX(-100%);
+      transition: transform 0.6s ease-in-out;
+    }
+    
+    .info-box:hover::before {
+      transform: translateX(100%);
+    }
+    
+    .info-box div {
+      margin-bottom: 10px;
+      display: flex;
+      align-items: flex-start;
+      color: var(--text-light);
+    }
+    
+    .info-box div:last-child {
+      margin-bottom: 0;
+    }
+    
+    .info-box div::before {
+      content: "•";
+      color: var(--primary-alt);
+      margin-right: 8px;
+      font-weight: bold;
+      font-size: 1.2em;
+    }
+    
+    .info-box a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+      margin-left: 4px;
+      transition: all 0.3s;
+    }
+    
+    .info-box a:hover {
+      text-decoration: underline;
+      text-shadow: 0 0 8px rgba(232, 213, 181, 0.7);
+    }
+    
+    /* Input Styles */
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin-bottom: 15px;
+    }
+    
+    input, select {
+      font: inherit;
+      padding: 14px 16px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: rgba(0, 0, 0, 0.4);
+      color: var(--text);
+      outline: none;
+      font-size: 15px;
+      transition: all 0.3s;
+      width: 100%;
+      box-shadow: inset 0 2px 5px rgba(0,0,0,0.2);
+    }
+    
+    input:focus, select:focus {
+      border-color: var(--primary-alt);
+      box-shadow: 0 0 0 3px rgba(18, 130, 162, 0.3), inset 0 2px 5px rgba(0,0,0,0.3);
+      transform: translateY(-2px);
+    }
+    
+    input::placeholder {
+      color: var(--text-light);
+      opacity: 0.7;
+    }
+    
+    .input-hint {
+      font-size: 13px;
+      color: var(--text-light);
+      margin-top: -8px;
+      opacity: 0.8;
+      padding: 0 10px;
+    }
+    
+    /* Button Styles */
+    button, .btn {
+      background: linear-gradient(135deg, var(--primary-alt), var(--primary));
+      color: var(--bg-dark);
+      border: none;
+      border-radius: 10px;
+      padding: 16px;
+      font-size: 16px;
+      font-weight: 700;
+      width: 100%;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+    }
+    
+    button:hover, .btn:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 30px rgba(18, 130, 162, 0.5);
+      letter-spacing: 0.5px;
+    }
+    
+    button::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.25),
+        transparent
+      );
+      transition: 0.6s ease-in-out;
+      transform: skewX(-20deg);
+    }
+    
+    button:hover::after {
+      left: 100%;
+    }
+    
+    /* Product Grid */
+    .produk-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+    
+    .produk-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 20px;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      font-size: 15px;
+      line-height: 1.7;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+    
+    .produk-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        135deg,
+        rgba(18, 130, 162, 0) 0%,
+        rgba(18, 130, 162, 0.05) 50%,
+        rgba(18, 130, 162, 0) 100%
+      );
+      transform: translateX(-100%);
+      transition: transform 0.6s ease-in-out;
+    }
+    
+    .produk-card:hover::before {
+      transform: translateX(100%);
+    }
+    
+    .produk-card:hover {
+      border: 1px solid var(--primary-alt);
+      transform: translateY(-8px);
+      box-shadow: 0 15px 35px rgba(18, 130, 162, 0.4);
+    }
+    
+    .produk-card.selected {
+      border: 2px solid var(--accent);
+      background: rgba(232, 213, 181, 0.1);
+      animation: selectedPulseAccent 1.5s infinite;
+      box-shadow: 0 0 20px rgba(232, 213, 181, 0.4);
+    }
+    
+    @keyframes selectedPulseAccent {
+      0% { box-shadow: 0 0 0 rgba(232, 213, 181, 0); }
+      50% { box-shadow: 0 0 20px rgba(232, 213, 181, 0.4); }
+      100% { box-shadow: 0 0 0 rgba(232, 213, 181, 0); }
+    }
+    
+    .produk-card b {
+      color: var(--accent);
+      font-weight: 800;
+      display: inline-block;
+      margin-top: 10px;
+      font-size: 1.2em;
+    }
+    
+    /* Price Display */
+    .harga-input {
+      background: rgba(232, 213, 181, 0.1);
+      font-weight: 800;
+      color: var(--accent);
+      border: 2px solid var(--accent);
+      border-radius: 12px;
+      padding: 18px;
+      font-size: 20px;
+      text-align: center;
+      transition: all 0.3s;
+      animation: priceGlowAccent 2s infinite alternate;
+      text-shadow: 0 0 10px rgba(232, 213, 181, 0.5);
+    }
+    
+    @keyframes priceGlowAccent {
+      0% { box-shadow: 0 0 5px rgba(232, 213, 181, 0.3); }
+      100% { box-shadow: 0 0 20px rgba(232, 213, 181, 0.6); }
+    }
+    
+    /* Payment Methods */
+    .metode-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    
+    .metode-item {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      font-size: 15px;
+      transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+    
+    .metode-item::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        135deg,
+        rgba(18, 130, 162, 0) 0%,
+        rgba(18, 130, 162, 0.05) 50%,
+        rgba(18, 130, 162, 0) 100%
+      );
+      transform: translateX(-100%);
+      transition: transform 0.6s ease-in-out;
+    }
+    
+    .metode-item:hover::before {
+      transform: translateX(100%);
+    }
+    
+    .metode-item:hover {
+      border-color: var(--primary-alt);
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(18, 130, 162, 0.3);
+    }
+    
+    .metode-item.selected {
+      border: 2px solid var(--accent);
+      background: rgba(232, 213, 181, 0.1);
+      animation: selectedPulseAccent 1.5s infinite;
+      box-shadow: 0 0 20px rgba(232, 213, 181, 0.4);
+    }
+    
+    .pay-icons {
+      display: flex;
+      align-items: center;
+      margin-right: 15px;
+    }
+    
+    .pay-icons img {
+      height: 25px;
+      margin-right: 8px;
+      border-radius: 4px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+    
+    /* Promo Section */
+    .promo-group {
+      display: flex;
+      gap: 0;
+      margin-top: 10px;
+      margin-bottom: 15px;
+    }
+    
+    .promo-group input {
+      flex: 1;
+      border-radius: 10px 0 0 10px;
+      border-right: none;
+    }
+    
+    .promo-group button {
+      border-radius: 0 10px 10px 0;
+      padding: 0 18px;
+      font-size: 14px;
+      background: var(--warning);
+      width: auto;
+      min-width: 80px;
+      color: var(--bg-dark);
+      font-weight: 700;
+    }
+    
+    .promo-group button:hover {
+      background: #E6B500;
+    }
+    
+    .promo-msg {
+      font-size: 14px;
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: 10px;
+      padding: 10px;
+      border-radius: 8px;
+    }
+    
+    .promo-success {
+      color: var(--success);
+      background: rgba(46, 204, 113, 0.15);
+      animation: bounceIn 0.5s;
+      border: 1px solid var(--success);
+    }
+    
+    .promo-error {
+      color: var(--error);
+      background: rgba(231, 76, 60, 0.15);
+      animation: shake 0.5s;
+      border: 1px solid var(--error);
+    }
+    
+    @keyframes bounceIn {
+      0% { transform: scale(0.8); opacity: 0; }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-5px); }
+      40%, 80% { transform: translateX(5px); }
+    }
+    
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+      animation: fadeIn 0.3s;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    .modal-content {
+      background: var(--bg-gradient);
+      border: 2px solid var(--accent);
+      border-radius: 15px;
+      width: 90%;
+      max-width: 500px;
+      max-height: 80vh;
+      overflow-y: auto;
+      padding: 25px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      position: relative;
+      animation: slideIn 0.3s;
+    }
+    
+    @keyframes slideIn {
+      from { transform: translateY(-50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--accent);
+    }
+    
+    .modal-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--accent);
+      text-shadow: 0 0 10px rgba(232, 213, 181, 0.5);
+    }
+    
+    .close-modal {
+      background: none;
+      border: none;
+      color: var(--accent);
+      font-size: 1.8rem;
+      cursor: pointer;
+      transition: all 0.3s;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+    }
+    
+    .close-modal:hover {
+      transform: rotate(90deg);
+      background: rgba(232, 213, 181, 0.1);
+    }
+    
+    .modal-body {
+      line-height: 1.7;
+      color: var(--text-light);
+    }
+    
+    .modal-body p {
+      margin-bottom: 15px;
+    }
+    
+    .modal-body strong {
+      color: var(--accent);
+      font-weight: 700;
+    }
+    
+    /* Responsive Design */
+    @media (min-width: 520px) {
+      .container {
+        margin: 30px auto;
+      }
+      
+      .produk-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    
+    @media (max-width: 380px) {
+      .headline-logo {
+        font-size: 2.8rem;
+      }
+      
+      .logo-domain {
+        font-size: 1.6rem;
+      }
+      
+      .headline-main {
+        font-size: 1.6rem;
+      }
+      
+      .headline-sub {
+        font-size: 0.9rem;
+        flex-direction: column;
+        gap: 5px;
+      }
+      
+      .headline-sub::before, 
+      .headline-sub::after {
+        display: none;
+      }
+      
+      .section-title {
+        font-size: 1.1rem;
+      }
+      
+      .section-title::before, 
+      .section-title::after {
+        margin: 0 8px;
+      }
+      
+      .produk-card {
+        padding: 15px;
+        font-size: 14px;
+      }
+      
+      .produk-card b {
+        font-size: 1.1em;
+      }
+      
+      .harga-input {
+        font-size: 18px;
+        padding: 16px;
+      }
+      
+      .metode-item {
+        padding: 12px;
+        font-size: 14px;
+      }
+      
+      .pay-icons img {
+        height: 20px;
+      }
+      
+      button, .btn {
+        padding: 14px;
+        font-size: 15px;
+      }
+    }
+
+    /* Ripple effect */
+    .ripple {
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .ripple:after {
+      content: "";
+      display: block;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      background-image: radial-gradient(circle, rgba(255,255,255,0.3) 10%, transparent 10.01%);
+      background-repeat: no-repeat;
+      background-position: 50%;
+      transform: scale(10, 10);
+      opacity: 0;
+      transition: transform .5s, opacity 1s;
+    }
+    
+    .ripple:active:after {
+      transform: scale(0, 0);
+      opacity: .3;
+      transition: 0s;
+    }
+    
+    /* New Animation Keyframes */
+    @keyframes letterDrop {
+      0% {
+        transform: translateY(-30px);
+        opacity: 0;
+      }
+      100% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+    
+    @keyframes slideInRight {
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+    
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    }
+    
+    @keyframes textGlow {
+      0% { text-shadow: 0 0 5px var(--text), 0 0 10px var(--accent); }
+      100% { text-shadow: 0 0 15px var(--text), 0 0 20px var(--accent), 0 0 25px var(--text-light); }
+    }
+    
+    @keyframes float {
+      0% { transform: translate(0, 0) rotate(0deg); }
+      25% { transform: translate(50px, 30px) rotate(90deg); }
+      50% { transform: translate(100px, 0) rotate(180deg); }
+      75% { transform: translate(50px, -30px) rotate(270deg); }
+      100% { transform: translate(0, 0) rotate(360deg); }
+    }
+
+    /* Style untuk tombol home */
+    #homeBtn {
+      background: var(--warning);
+      color: var(--bg-dark);
+      margin-bottom: 0;
+    }
+
+    #homeBtn:hover {
+      background: #E6B500 !important;
+      box-shadow: 0 12px 30px rgba(241, 196, 15, 0.5) !important;
+    }
+  </style>
+</head>
+<body>
+  <h1 class="headline-logo">
+    <span class="logo-text">
+      <span class="logo-part" style="--delay: 0s">X</span>
+      <span class="logo-part" style="--delay: 0.1s">Y</span>
+      <span class="logo-part" style="--delay: 0.2s">Z</span>
+      <span class="logo-part" style="--delay: 0.3s">O</span>
+      <span class="logo-part" style="--delay: 0.4s">P</span>
+      <span class="logo-part" style="--delay: 0.5s">E</span>
+      <span class="logo-part" style="--delay: 0.6s">D</span>
+      <span class="logo-part" style="--delay: 0.7s">I</span>
+      <span class="logo-part" style="--delay: 0.8s">A</span>
+    </span>
+    <span class="logo-dot">.</span>
+    <span class="logo-domain">ID</span>
+  </h1>
+
+  <div class="headline-section">
+    <div class="headline-content">
+      <div class="headline-main">Canva Pro</div>
+      <div class="headline-sub">Akun Berkualitas • Garansi Resmi • Layanan 24 Jam</div>
+    </div>
+    <div class="headline-decoration">
+      <div class="decoration-circle"></div>
+      <div class="decoration-circle"></div>
+      <div class="decoration-circle"></div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="section">
+      <button id="homeBtn" class="ripple">
+        <i class="fas fa-home"></i> KEMBALI KE RUMAH
+      </button>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><i class="fas fa-user-edit"></i> Masukan Data Tujuan</div>
+      <form id="dataForm">
+        <div class="input-group">
+          <input type="text" id="email" placeholder="Email" required>
+          <input type="tel" id="nomorWhatsapp" placeholder="Nomor Whatsapp" required inputmode="numeric">
+        </div>
+        <div class="input-hint">
+          Masukan alamat email aktif Anda. Akun atau link invite akan di kirim melalui riwayat pesanan atau email Anda,Masukan Nomor WhatsApp Aktif Untuk Verifikasi pembayaran dan Pengiriman Akun
+        </div>
+        <button type="button" id="saveIdBtn" class="ripple">
+          <i class="fas fa-save"></i> Simpan Data
+        </button>
+      </form>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><i class="fas fa-box-open"></i> Pilih Produk</div>
+      <div class="produk-grid" id="produkGrid">
+        <div class="produk-card" data-harga="2500" data-nama="Canva Pro Anggota [ 1 Bulan ] [ Garansi 1 Bulan ]">
+          Canva Pro Anggota<br>
+          [ 1 Bulan ] [ Garansi 1 Bulan ]<br>
+          <b>Rp 2.500</b>
+        </div>
+        <div class="produk-card" data-harga="3500" data-nama="Canva Pro Anggota [ 2 Bulan ] [ Garansi 2 Bulan ]">
+          Canva Pro Anggota<br>
+          [ 2 Bulan ] [ Garansi 2 Bulan ]<br>
+          <b>Rp 3.500</b>
+        </div>
+        <div class="produk-card" data-harga="3500" data-nama="Canva Pro Desainer [ 1 Bulan ] [ Garansi 1 Bulan ]">
+          Canva Pro Desainer<br>
+          [ 1 Bulan ] [ Garansi 1 Bulan ]<br>
+          <b>Rp 3.500</b>
+        </div>
+        <div class="produk-card" data-harga="13500" data-nama="Canva Education [ 1 Tahun ] [ Garansi 6 Bulan ]">
+          Canva Education<br>
+          [ 1 Tahun ] [ Garansi 6 Bulan ]<br>
+          <b>Rp 13.500</b>
+        </div>
+      </div>
+    </div>
+    <div class="section">
+      <div class="section-title"><i class="fas fa-tags"></i> Harga</div>
+      <div class="harga-input" id="hargaBox">Rp 0</div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><i class="fas fa-credit-card"></i> Pilih Pembayaran</div>
+      <div class="metode-list" id="metodeList">
+        <div class="metode-item" data-metode="QRIS">
+          <span class="pay-icons">
+            <img src="https://files.catbox.moe/o4x2cb.jpg" alt="QRIS">
+          </span>QRIS (semua e-wallet/bank)
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><i class="fas fa-tag"></i> Kode Promo</div>
+      <div class="promo-group">
+        <input type="text" id="promoCode" placeholder="KODE VOUCHER">
+        <button type="button" id="pakaiVoucherBtn" class="ripple">
+          <i class="fas fa-tag"></i> Pakai
+        </button>
+      </div>
+      <div class="promo-msg" id="promoMsg"></div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><i class="fas fa-shopping-cart"></i> Tahap Akhir</div>
+      <button id="orderBtn" class="ripple">
+        <i class="fas fa-shopping-cart"></i> ORDER SEKARANG
+      </button>
+    </div>
+  </div>
+
+  <!-- Modal for Terms and Conditions -->
+  <div class="modal" id="termsModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">KETENTUAN NETFLIX</h3>
+        <button class="close-modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p><strong>‼️ KETENTUAN BACA SEBELUM LOGIN ‼️</strong></p>
+        <p>— Dilarang mengubah EMAIL, PASSWORD, PROFIL, dan PIN!</p>
+        <p>— Hanya login di 1 perangkat, lebih dari 1 dapat menyebabkan akun limit!</p>
+        <p>— Dilarang meminjamkan dan membagikan password kepada orang lain!</p>
+        <p>— Dilarang otak atik pembayaran dan juga plan! Jangan pencet cancel membership!</p>
+        <p>— Jika terjadi screen limit (batas menonton) harap menunggu dan coba kembali nanti.</p>
+        <p>— Jika ada yang melanggar menonton dua devices yang membuat screen limit, harap lapor ke Whatsapp Admin.</p>
+        <p>— Apabila password salah langsung lapor kepada admin dan jangan klik reset!</p>
+        <p>Selengkapnya cek ketentuan yang ada di email dan mohon jangan melanggar ketentuan.</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Produk selection
+    const produkCards = document.querySelectorAll('.produk-card');
+    const hargaBox = document.getElementById('hargaBox');
+    let produkTerpilih = null;
+    
+    produkCards.forEach(card => {
+      card.addEventListener('click', () => {
+        produkCards.forEach(c => c.classList.remove('selected'));
+        card.classList.add('selected');
+        produkTerpilih = {
+          nama: card.getAttribute('data-nama'),
+          harga: parseInt(card.getAttribute('data-harga'),10)
+        };
+        hargaBox.innerText = "Rp " + produkTerpilih.harga.toLocaleString('id-ID');
+        document.getElementById('promoMsg').innerText = '';
+        
+        // Add animation effect
+        card.style.animation = 'none';
+        card.offsetHeight; // Trigger reflow
+        card.style.animation = 'selectedPulseAccent 1.5s infinite';
+      });
+    });
+
+    // Metode pembayaran
+    const metodeItems = document.querySelectorAll('.metode-item');
+    let metodeTerpilih = null;
+    
+    metodeItems.forEach(item => {
+      item.addEventListener('click', () => {
+        metodeItems.forEach(i => i.classList.remove('selected'));
+        item.classList.add('selected');
+        metodeTerpilih = item.getAttribute('data-metode');
+        
+        // Add animation effect
+        item.style.animation = 'none';
+        item.offsetHeight; // Trigger reflow
+        item.style.animation = 'selectedPulseAccent 1.5s infinite';
+      });
+    });
+
+    // Validasi input nomor WhatsApp hanya angka
+    document.getElementById('nomorWhatsapp').addEventListener('input', function(e) {
+      // Hapus semua karakter non-digit
+      this.value = this.value.replace(/[^0-9]/g, '');
+      
+      // Validasi panjang nomor (contoh: minimal 8 digit, maksimal 15 digit)
+      if (this.value.length > 15) {
+        this.value = this.value.slice(0, 15);
+      }
+    });
+
+    // "Save ID" button
+    let dataCustomer = {};
+    document.getElementById('saveIdBtn').onclick = function() {
+      const email = document.getElementById('email').value.trim();
+      const nomorWhatsapp = document.getElementById('nomorWhatsapp').value.trim();
+      
+      // Validasi nomor WhatsApp hanya angka dan minimal panjang tertentu
+      if (!email || !nomorWhatsapp || !/^\d+$/.test(nomorWhatsapp) || nomorWhatsapp.length < 8) { 
+        alert('Harap isi semua field dengan benar!\nNomor WhatsApp harus berupa angka dan minimal 8 digit.'); 
+        return; 
+      }
+      
+      dataCustomer = {
+        email: email,
+        nomorWhatsapp: nomorWhatsapp
+      };
+      
+      // Success animation
+      const originalText = this.innerHTML;
+      this.innerHTML = '<i class="fas fa-check"></i> Data Tersimpan!';
+      this.style.background = 'var(--success)';
+      setTimeout(() => {
+        this.innerHTML = originalText;
+        this.style.background = 'linear-gradient(135deg, var(--primary-alt), var(--primary))';
+      }, 2000);
+    };
+
+    // Voucher
+    let promoApplied = false;
+    document.getElementById('pakaiVoucherBtn').onclick = function() {
+      const code = document.getElementById('promoCode').value.trim();
+      const msg = document.getElementById('promoMsg');
+      
+      if (!produkTerpilih) { 
+        msg.innerText = 'Pilih produk terlebih dahulu.';
+        msg.className = 'promo-msg promo-error';
+        return; 
+      }
+      
+      if (code === 'DISKON10') {
+        let diskon = Math.floor(produkTerpilih.harga * 0.1);
+        hargaBox.innerText = "Rp " + (produkTerpilih.harga - diskon).toLocaleString('id-ID');
+        msg.innerText = 'Kode promo berhasil! Diskon 10% diterapkan.';
+        msg.className = 'promo-msg promo-success';
+        promoApplied = true;
+        
+        // Add confetti effect
+        createConfetti();
+      } else if (code) {
+        msg.innerText = 'Kode promo tidak valid atau sudah kadaluarsa.';
+        msg.className = 'promo-msg promo-error';
+        promoApplied = false;
+      } else {
+        msg.innerText = '';
+        promoApplied = false;
+        if (produkTerpilih) {
+          hargaBox.innerText = "Rp " + produkTerpilih.harga.toLocaleString('id-ID');
+        }
+      }
+    };
+
+    // Simple confetti effect
+    function createConfetti() {
+      const confetti = document.createElement('div');
+      confetti.style.position = 'fixed';
+      confetti.style.width = '10px';
+      confetti.style.height = '10px';
+      confetti.style.background = 'var(--accent)';
+      confetti.style.borderRadius = '50%';
+      confetti.style.zIndex = '1000';
+      confetti.style.left = Math.random() * window.innerWidth + 'px';
+      confetti.style.top = '-10px';
+      confetti.style.opacity = '0.8';
+      confetti.style.boxShadow = '0 0 5px var(--accent)';
+      document.body.appendChild(confetti);
+      
+      const animation = confetti.animate([
+        { top: '-10px', opacity: 0.8 },
+        { top: window.innerHeight + 'px', opacity: 0 }
+      ], {
+        duration: 1500,
+        easing: 'cubic-bezier(0.1, 0.8, 0.9, 1)'
+      });
+      
+      animation.onfinish = () => confetti.remove();
+    }
+
+    // Order - sekarang mengirim ke Telegram DAN redirect ke halaman pembayaran
+    document.getElementById('orderBtn').onclick = async function() {
+      if (!dataCustomer.email || !dataCustomer.nomorWhatsapp) { 
+        alert('Harap isi dan simpan data terlebih dahulu!'); 
+        return; 
+      }
+      if (!produkTerpilih) { 
+        alert('Harap pilih produk yang ingin dipesan!'); 
+        return; 
+      }
+      if (!metodeTerpilih) { 
+        alert('Harap pilih metode pembayaran!'); 
+        return; 
+      }
+      
+      // Simpan data pesanan di localStorage
+      localStorage.setItem('productName', produkTerpilih.nama);
+      localStorage.setItem('productPrice', produkTerpilih.harga);
+      localStorage.setItem('customerEmail', dataCustomer.email);
+      localStorage.setItem('customerWhatsapp', dataCustomer.nomorWhatsapp);
+      localStorage.setItem('paymentMethod', metodeTerpilih);
+      
+      // Kirim notifikasi ke Telegram
+      try {
+        const botToken = '8251232340:AAFFsdGihRSPpgyA6BUmPMKj_DOgrHRRDag'; // Ganti dengan token bot Telegram Anda
+        const chatId = '7091302327'; // Ganti dengan chat ID tujuan
+        const message = `📢 *PESANAN BARU* 📢
+        
+📌 *Detail Produk*
+${produkTerpilih.nama}
+Harga: Rp ${produkTerpilih.harga.toLocaleString('id-ID')}
+
+👤 *Data Customer*
+Email: ${dataCustomer.email}
+WhatsApp: ${dataCustomer.nomorWhatsapp}
+
+💳 *Metode Pembayaran*
+${metodeTerpilih}
+
+⏰ Waktu: ${new Date().toLocaleString()}`;
+
+        const telegramUrl = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}&parse_mode=Markdown`;
+        
+        await fetch(telegramUrl);
+        
+        // Redirect ke halaman pembayaran
+        window.location.href = 'depo.html';
+      } catch (error) {
+        console.error('Error sending to Telegram:', error);
+        // Tetap redirect meskipun gagal kirim ke Telegram
+        window.location.href = 'depo.html';
+      }
+    };
+    
+    // Initialize animations for all sections
+    document.addEventListener('DOMContentLoaded', () => {
+      const sections = document.querySelectorAll('.section');
+      sections.forEach((section, index) => {
+        setTimeout(() => {
+          section.style.opacity = '1';
+        }, 100 * (index + 1));
+      });
+    });
+
+    // Terms and Conditions Modal
+    const termsModal = document.getElementById('termsModal');
+    const showTermsBtn = document.getElementById('showTermsBtn');
+    const closeModalBtn = document.querySelector('.close-modal');
+
+    showTermsBtn.addEventListener('click', () => {
+      termsModal.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    });
+
+    closeModalBtn.addEventListener('click', () => {
+      termsModal.style.display = 'none';
+      document.body.style.overflow = 'auto';
+    });
+
+    // Close modal when clicking outside of it
+    termsModal.addEventListener('click', (e) => {
+      if (e.target === termsModal) {
+        termsModal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+      }
+    });
+
+    // Tombol Kembali ke Rumah
+    document.getElementById('homeBtn').onclick = function() {
+      window.location.href = 'index.html'; // Ganti dengan halaman utama Anda
+    };
+  </script>
+</body>
+</html>
