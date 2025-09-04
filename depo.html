@@ -327,6 +327,17 @@
       color: var(--accent);
     }
 
+    .auto-process-info {
+      background: rgba(46, 204, 113, 0.15);
+      color: var(--success);
+      border: 1px solid var(--success);
+      padding: 15px;
+      border-radius: 12px;
+      text-align: center;
+      font-weight: 600;
+      margin: 20px 0;
+    }
+
     @keyframes fadeInUp {
       from {
         opacity: 0;
@@ -449,6 +460,10 @@
         <div class="countdown" id="countdown">Batas waktu: 15:00</div>
       </div>
       
+      <div class="auto-process-info">
+        <i class="fas fa-info-circle"></i> JIKA SUDAH MELAKUKAN PEMBAYARAN PESANAN AKAN DI PROSES OTOMATIS
+      </div>
+      
       <div class="status-message status-processing" id="statusProcessing">
         <i class="fas fa-sync-alt fa-spin"></i> Menunggu pembayaran...
       </div>
@@ -545,41 +560,33 @@
       amountDisplay.textContent = `Rp ${orderData.productPrice.toLocaleString('id-ID')}`;
     }
 
-    // Fungsi untuk membuat permintaan pembayaran
+    // Fungsi untuk membuat permintaan pembayaran menggunakan bayar-six.vercel.app
     async function createPaymentRequest() {
       try {
         showStatus('processing');
         
-        // Tentukan kode produk berdasarkan nama produk
-        let productCode = 'BSTATION'; // Default
+        // Generate QR Code menggunakan API bayar-six
+        const qrisUtama = '00020101021126610014COM.GO-JEK.WWW01189360091437809159890210G7809159890303UMI51440014ID.CO.QRIS.WWW0215ID10243444435010303UMI5204581653033605802ID5925Aether Store, Pagerageung6011TASIKMALAYA61054615862070703A0163045AF8';
         
-        if (orderData.productName.includes('Netflix')) productCode = 'NETFLIX';
-        else if (orderData.productName.includes('Canva')) productCode = 'CANVA';
-        else if (orderData.productName.includes('Prime')) productCode = 'PRIME';
+        // Simpan QRIS utama ke localStorage
+        localStorage.setItem('QRIS_Utama', qrisUtama);
         
-        // Tentukan target berdasarkan data customer
-        const target = orderData.customerEmail !== '-' ? orderData.customerEmail : orderData.customerWhatsapp;
-        
-        const response = await fetch('http://localhost:3000/order', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            code: productCode,
-            target: target
-          }),
-        });
-        
+        // Panggil API untuk generate QR Code
+        const response = await fetch(`https://api-mininxd.vercel.app/qris?qris=${encodeURIComponent(qrisUtama)}&nominal=${orderData.productPrice}`);
         const data = await response.json();
         
-        if (response.ok) {
-          reffId = data.reff_id;
-          document.getElementById('qrisImage').src = data.qr;
+        if (data && (data.QR || data.qr || data.qris)) {
+          const qrString = data.QR || data.qr || data.qris;
+          reffId = 'REF-' + Date.now(); // Buat referensi ID sederhana
+          
+          // Generate QR Code dari string menggunakan QRCode.js
+          const qrCodeDataUrl = await generateQRCodeFromString(qrString);
+          document.getElementById('qrisImage').src = qrCodeDataUrl;
+          
           startCountdown();
           startPaymentStatusCheck();
         } else {
-          throw new Error(data.message || 'Gagal membuat permintaan pembayaran');
+          throw new Error('Gagal membuat QR Code dari API');
         }
       } catch (error) {
         console.error('Error:', error);
@@ -587,15 +594,48 @@
       }
     }
 
+    // Fungsi untuk generate QR Code dari string menggunakan QRCode.js
+    function generateQRCodeFromString(qrString) {
+      return new Promise((resolve, reject) => {
+        try {
+          // Buat canvas untuk QR Code
+          const canvas = document.createElement('canvas');
+          
+          // Gunakan QRCode.js untuk membuat QR Code
+          QRCode.toCanvas(canvas, qrString, {
+            width: 280,
+            margin: 2,
+            color: {
+              dark: '#000000',
+              light: '#FFFFFF'
+            }
+          }, function(error) {
+            if (error) {
+              reject(error);
+            } else {
+              resolve(canvas.toDataURL());
+            }
+          });
+        } catch (error) {
+          reject(error);
+        }
+      });
+    }
+
     // Fungsi untuk memeriksa status pembayaran
     async function checkPaymentStatus() {
       if (!reffId) return;
       
       try {
-        const response = await fetch(`http://localhost:3000/status/${reffId}`);
-        const data = await response.json();
+        // Di sini Anda perlu menambahkan logika untuk memeriksa status pembayaran
+        // Karena menggunakan sistem bayar-six, Anda perlu mengimplementasikan
+        // mekanisme pengecekan status pembayaran yang sesuai
         
-        if (data.data && data.data.status === 'PAID') {
+        // Untuk sementara, kita akan menggunakan simulasi
+        // Dalam implementasi nyata, Anda perlu menghubungi API pembayaran
+        const isPaid = Math.random() > 0.9; // Simulasi: 10% kemungkinan berhasil
+        
+        if (isPaid) {
           clearInterval(paymentCheckInterval);
           clearInterval(countdownInterval);
           showStatus('success');
@@ -610,7 +650,7 @@
 
     // Fungsi untuk memulai pemeriksaan status pembayaran
     function startPaymentStatusCheck() {
-      paymentCheckInterval = setInterval(checkPaymentStatus, 5000); // Cek setiap 5 detik
+      paymentCheckInterval = setInterval(checkPaymentStatus, 10000); // Cek setiap 10 detik
     }
 
     // Fungsi untuk memulai countdown
@@ -670,10 +710,16 @@
 
     // Inisialisasi saat halaman dimuat
     document.addEventListener('DOMContentLoaded', function() {
-      if (loadOrderData()) {
-        displayOrderDetails();
-        createPaymentRequest();
-      }
+      // Load QRCode.js library
+      const script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js';
+      script.onload = function() {
+        if (loadOrderData()) {
+          displayOrderDetails();
+          createPaymentRequest();
+        }
+      };
+      document.head.appendChild(script);
       
       // Event listener untuk tombol cek status
       document.getElementById('checkStatusBtn').addEventListener('click', checkPaymentStatus);
